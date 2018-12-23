@@ -15,7 +15,7 @@ class LottoResult:
     @staticmethod
     def from_csv_entry(line):
         elements = [e.strip() for e in line.split(",")]
-        return LottoResult(elements[0], elements[1], elements[2:])
+        return LottoResult(elements[0], elements[1], [int(n) for n in elements[2:]])
 
 
 class LottoResultBuilder:
@@ -57,3 +57,7 @@ class Pair:
             return False
         else:
             return self.a == other.a and self.b == other.b
+
+    def __str__(self):
+        return "[%d, %d]" % (self.a, self.b)
+

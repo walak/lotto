@@ -5,7 +5,8 @@ from extract_data import OUTPUT_FILENAME as INPUT_FILENAME
 
 results = []
 with open(INPUT_FILENAME) as file:
-    results = [LottoResult.from_csv_entry(l) for l in file.readlines()]
+    results = [LottoResult.from_csv_entry(l) for l in file.readlines() if "2018" in l]
+    # results = [LottoResult.from_csv_entry(l) for l in file.readlines()]
     number_of_numbers = {}
     for r in results:
         for n in r.results:
