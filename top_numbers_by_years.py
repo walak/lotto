@@ -5,8 +5,8 @@ from service import DataLoader, filter_by_year
 
 results = []
 DATA_LOADER = DataLoader(INPUT_FILENAME)
-YEARS = range(1957, 2018)
-
+YEARS = range(1957, 2018+1)
+NUMBER_OF_TOP_NUMBERS = 6
 
 for year in YEARS:
     results = DATA_LOADER.load(filter=filter_by_year(year))
@@ -17,6 +17,7 @@ for year in YEARS:
                 number_of_numbers[n] = number_of_numbers[n] + 1
             else:
                 number_of_numbers[n] = 1
-
-    for key, value in sorted(number_of_numbers.items(), key=operator.itemgetter(1),reverse=True):
-        print("%s => %d" % (key, value))
+    sorted_results = sorted(number_of_numbers.items(), key=operator.itemgetter(1), reverse=True)
+    print("Year: %d" % year)
+    for i in range(0, NUMBER_OF_TOP_NUMBERS):
+        print("%d: number=%d hits=%d" % (i + 1, sorted_results[i][0], sorted_results[i][1]))
